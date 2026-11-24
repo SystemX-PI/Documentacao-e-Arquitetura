@@ -6,6 +6,11 @@ O objetivo é desenvolver uma aplicação web capaz de tornar mais eficiente o p
 
 ---
 
+## Referências de integração
+
+- [Contratos HTTP do frontend e backend](CONTRATOS_HTTP.md)
+- [Validação e preparação da entrega](VALIDACAO_ENTREGA.md)
+
 ## Objetivo do Projeto
 
 O projeto tem como objetivo criar um sistema que permita centralizar e organizar as informações dos clientes contemplados em consórcios.
