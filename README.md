@@ -10,7 +10,6 @@ O objetivo é desenvolver uma aplicação web capaz de tornar mais eficiente o p
 
 - [Instalação oficial do Back-end e da pilha completa](https://github.com/SystemX-PI/Back-end#subir-o-projeto-completo-com-docker)
 - [Execução local e testes do Front-End](https://github.com/SystemX-PI/Front-End#executar-localmente)
-
 - [Contratos HTTP do frontend e backend](CONTRATOS_HTTP.md)
 - [Validação e preparação da entrega](VALIDACAO_ENTREGA.md)
 

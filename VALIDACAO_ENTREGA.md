@@ -1,5 +1,7 @@
 # Validação técnica e preparação da entrega
 
+Este guia registra os ensaios da versão candidata. A instalação da versão publicada está nos READMEs dos repositórios de código. Os caminhos e recursos de homologação abaixo passam a fazer parte da versão oficial quando os respectivos Pull Requests são integrados.
+
 ## Operação local e Compose
 
 Os checkouts de Back-end e Front-End ficam em pastas irmãs. Siga o guia `Back-end/LOCAL.md` para iniciar o Compose padrão ou o projeto descartável `compose.verify.yml`. O ensaio descartável sobe Nginx, Spring Boot e MySQL com volumes por projeto. A única porta publicada é 5177 em loopback. O Nginx resolve o serviço `backend` pela rede Compose. As verificações de saúde mostram prontidão do MySQL, inicialização do Spring e resposta do Nginx. A validação por Chromium complementa esses health checks com login, permissões, paginação, baixa idempotente, histórico e comunicação sem disparo externo.
