@@ -37,4 +37,12 @@ A auditoria somente leu as configurações remotas. Os workflows atualizados pre
 
 ## Limitações
 
-A cobertura de acessibilidade verificou teclado, foco, Escape, labels, erros, ações desativadas e reflow de fluxos selecionados. Ela não equivale a auditoria completa com leitor de tela. Homologação externa de WhatsApp, Gmail e Stripe permanece separada da integração local.
+A cobertura de acessibilidade verificou teclado, foco, Escape, rótulos, erros, ações desativadas e reflow de fluxos selecionados. A avaliação completa com leitor de tela continua pendente.
+
+## Homologações e entrega
+
+- A candidata do lote 9 passou em banco limpo e na atualização de backup fictício restaurado da V19 para a V21. Na atualização que inclui V20, pare os workers antigos antes de migrar.
+- Na candidata do lote 9, o Stripe Sandbox confirmou cartão, Pix, webhooks, recusa, cancelamento, expiração e persistência. Renovação automática e inadimplência por ciclo ainda exigem um sandbox autorizado com Test Clocks. A referência do provedor é o [guia da Stripe CLI](https://docs.stripe.com/cli/sandbox).
+- Use o Client ID OAuth público em `GOOGLE_CLIENT_ID` no backend e em `VITE_GOOGLE_CLIENT_ID` no frontend. Cadastre no Google Cloud a origem exata usada pelo navegador.
+- A Evolution usa PostgreSQL, Redis e persistência de instâncias. O backend acessa o serviço pela rede Docker. Habilite o canal só depois de preparar a instância de teste. A homologação externa de WhatsApp e Gmail continua pendente.
+- Abra revisões da versão oficial contra a `main`. Confira os checks, a compatibilidade entre os repositórios e a revisão independente das mudanças sensíveis. Valide novamente a partir de um clone limpo após o merge. Deploy exige uma etapa separada.
