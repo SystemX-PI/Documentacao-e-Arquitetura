@@ -337,3 +337,8 @@ O projeto é desenvolvido por:
 Em desenvolvimento.
 
 **Vigência:** 31/08/2026 até 03/03/2027.
+
+## Guia técnico do front-end
+
+- [Versão em PDF](docs/frontend/GUIA_FRONTEND_SYSTEMX.pdf)
+- [Arquivo HTML editável usado para gerar o PDF](docs/frontend/GUIA_FRONTEND_SYSTEMX.html)

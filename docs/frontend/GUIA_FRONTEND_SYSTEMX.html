@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guia técnico do front-end SystemX</title>
+<style>
+@page { size: A4; margin: 0; }
+:root { --navy:#0b1730; --navy2:#132744; --blue:#1769e8; --teal:#16b99a; --ink:#18243a; --muted:#5c6b82; --line:#dbe3ee; --wash:#f3f7fc; --pale:#eaf2ff; }
+* { box-sizing:border-box; }
+html,body { margin:0; padding:0; color:var(--ink); font-family:Inter,"Segoe UI",Arial,sans-serif; font-size:9pt; line-height:1.45; }
+.page { width:210mm; height:297mm; padding:15mm 16mm 17mm; position:relative; overflow:hidden; page-break-after:always; background:#fff; }
+.page:last-child { page-break-after:auto; }
+.kicker { color:var(--blue); font-size:8pt; letter-spacing:1.5px; font-weight:800; text-transform:uppercase; margin:0 0 4mm; }
+h1,h2,h3,p { margin-top:0; }
+h1 { color:var(--navy); font-size:27pt; line-height:1.12; letter-spacing:-.7px; margin:0 0 5mm; }
+h2 { color:var(--navy); font-size:19pt; line-height:1.2; letter-spacing:-.3px; margin:0 0 4mm; }
+h3 { color:var(--navy2); font-size:11pt; margin:0 0 2mm; }
+p { margin:0 0 3mm; }
+.lead { color:var(--muted); font-size:11pt; line-height:1.55; max-width:165mm; }
+.small { color:var(--muted); font-size:8pt; }
+.badge { display:inline-block; padding:1.5mm 3mm; border-radius:20px; background:#eaf7f4; color:#087d69; font-weight:700; font-size:8pt; }
+.meta { color:#d8e5f9; font-size:8.5pt; line-height:1.7; margin-top:8mm; }
+.cover { background:linear-gradient(145deg,var(--navy) 0%,#10284a 70%,#153b61 100%); color:#fff; }
+.cover h1 { color:#fff; font-size:34pt; max-width:155mm; margin-bottom:5mm; }
+.cover .kicker { color:#69dfc1; }
+.cover .lead { color:#d4e0ef; max-width:155mm; }
+.cover .meta { border-top:1px solid rgba(255,255,255,.2); padding-top:4mm; }
+.brandmark { width:15mm; height:7mm; border-radius:6mm; background:linear-gradient(90deg,#2584ff 0 50%,#22c7aa 50% 100%); margin-bottom:22mm; }
+.cover-art { margin-top:20mm; border:1px solid rgba(255,255,255,.22); border-radius:5mm; padding:7mm; background:rgba(255,255,255,.06); }
+.flow { display:flex; align-items:stretch; gap:3mm; }
+.flow-card { flex:1; min-height:23mm; border-radius:3mm; background:#fff; color:var(--navy); padding:4mm; }
+.flow-card strong { display:block; font-size:9pt; margin-bottom:1.5mm; }
+.flow-card span { color:var(--muted); font-size:7.5pt; }
+.flow-arrow { color:#67dbc0; align-self:center; font-size:16pt; font-weight:700; }
+.cover-note { color:#c4d5eb; font-size:8pt; margin-top:5mm; }
+.section-head { border-bottom:1px solid var(--line); padding-bottom:4mm; margin-bottom:5mm; }
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:4mm; }
+.card { border:1px solid var(--line); border-radius:3mm; padding:4mm; background:#fff; break-inside:avoid; }
+.card.tint { background:var(--wash); }
+.card.blue { background:var(--pale); border-color:#c9dcfa; }
+.card.teal { background:#ebf8f5; border-color:#c4e9df; }
+.card p:last-child, .card ul:last-child { margin-bottom:0; }
+ul { margin:1mm 0 3mm; padding-left:5mm; }
+li { margin:0 0 1.5mm; }
+.tight li { margin-bottom:.7mm; }
+.pill { display:inline-block; background:var(--pale); color:#1353ad; border-radius:10px; padding:.8mm 2mm; font-size:7pt; font-weight:700; margin:0 1mm 1mm 0; }
+.table { width:100%; border-collapse:collapse; margin:2mm 0 4mm; font-size:7.8pt; }
+.table th { text-align:left; background:var(--navy2); color:white; padding:2.3mm 2.5mm; font-size:7.5pt; }
+.table td { border-bottom:1px solid var(--line); padding:2mm 2.5mm; vertical-align:top; }
+.table tr:nth-child(even) td { background:#f8fafd; }
+.table code, code, pre { font-family:Consolas,"Cascadia Code",monospace; }
+.table code { color:#164aa0; font-size:7.4pt; }
+pre { white-space:pre-wrap; background:#101d33; color:#e8f1ff; border-radius:3mm; padding:4mm; font-size:8pt; line-height:1.5; margin:2mm 0 4mm; }
+.inline { color:#145ac0; background:#eef4ff; border-radius:2px; padding:.3mm 1mm; }
+.callout { border-left:1mm solid var(--teal); background:#eef8f6; padding:3mm 4mm; margin:3mm 0; border-radius:0 2mm 2mm 0; }
+.callout.warn { border-color:#edae34; background:#fff8e9; }
+.numbered { display:grid; grid-template-columns:8mm 1fr; gap:2mm; margin:2mm 0; }
+.numbered b { width:7mm; height:7mm; border-radius:50%; background:var(--blue); color:white; text-align:center; padding-top:1mm; font-size:8pt; }
+.footer { position:absolute; bottom:7mm; left:16mm; right:16mm; display:flex; justify-content:space-between; color:#708096; border-top:1px solid var(--line); padding-top:2.5mm; font-size:7.2pt; }
+.cover .footer { color:#a9bed8; border-color:rgba(255,255,255,.22); }
+a { color:#155fcb; text-decoration:none; }
+@media print { body { -webkit-print-color-adjust:exact; print-color-adjust:exact; } }
+</style>
+</head>
+<body>
+<section class="page cover">
+  <div class="brandmark"></div>
+  <p class="kicker">Documentação técnica · produto web</p>
+  <h1>Front-end<br>SystemX</h1>
+  <p class="lead">Guia funcional e técnico da interface web: estrutura, navegação, perfis, integrações, comunicação com a API e execução local.</p>
+  <div class="meta"><strong>ConsorTech · SystemX-PI/Front-End</strong><br>Referência do código: branch <code>main</code>, commit <code>6537348</code><br>Revisão: 26 de novembro de 2026</div>
+  <div class="cover-art">
+    <p class="kicker">Visão da arquitetura</p>
+    <div class="flow">
+      <div class="flow-card"><strong>Navegador</strong><span>React · TypeScript · React Router</span></div><div class="flow-arrow">›</div>
+      <div class="flow-card"><strong>Front-end</strong><span>telas, validação de entrada e estado visual</span></div><div class="flow-arrow">›</div>
+      <div class="flow-card"><strong>Proxy / API</strong><span>Vite no desenvolvimento · Nginx no Docker</span></div><div class="flow-arrow">›</div>
+      <div class="flow-card"><strong>Back-end</strong><span>REST · regras · autenticação · dados</span></div>
+    </div>
+    <p class="cover-note">O navegador chama a API por HTTP. O front-end não se conecta diretamente ao MySQL.</p>
+  </div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>01 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">01 · Fundamentos</p><h2>Como o front está organizado</h2><p class="lead">Uma aplicação de página única que atende o espaço da conta e a operação de consórcios pela mesma base de interface.</p></div>
+  <div class="grid2">
+    <div class="card blue"><h3>Stack principal</h3><p><span class="pill">React 19</span><span class="pill">TypeScript 6</span><span class="pill">Vite 8</span><span class="pill">React Router 7</span><span class="pill">CSS</span></p><p>Lucide fornece ícones; <code>qrcode.react</code> desenha QR Codes de demonstração. O estilo combina folhas CSS próprias e o plugin Tailwind do Vite.</p></div>
+    <div class="card teal"><h3>Responsabilidades</h3><ul class="tight"><li>Renderizar as telas e guiar a navegação.</li><li>Validar dados de entrada e apresentar erros, carregamentos e confirmações.</li><li>Enviar e receber dados por endpoints REST.</li><li>Exibir o estado informado pela API, sem substituir regras do servidor.</li></ul></div>
+  </div>
+  <h3 style="margin-top:5mm">Mapa do código</h3>
+  <table class="table"><thead><tr><th>Local</th><th>Responsabilidade</th></tr></thead><tbody>
+    <tr><td><code>src/routes/index.tsx</code></td><td>Rotas públicas, protegidas, redirecionamentos e limites de perfil.</td></tr>
+    <tr><td><code>src/pages/</code></td><td>Páginas da plataforma, cadastros, operação e portal do cliente.</td></tr>
+    <tr><td><code>src/components/</code></td><td>Shells, menus, formulários, feedback, filas e componentes compartilhados.</td></tr>
+    <tr><td><code>src/services/</code></td><td>Autenticação, HTTP, APIs de negócio, formatação e notificações.</td></tr>
+    <tr><td><code>src/*.css</code></td><td>Sistema visual, temas, acesso, plataforma e refinamentos do espaço.</td></tr>
+    <tr><td><code>dev/mock-api.ts</code></td><td>API simulada para desenvolvimento visual quando ativada explicitamente.</td></tr>
+    <tr><td><code>tests/</code></td><td>Testes de interface, autenticação, operação, acessibilidade e execução real isolada.</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>Estado da aplicação:</strong> formulários e estados transitórios ficam em componentes React. Dados persistentes, permissões e resultado das operações vêm do back-end.</div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>02 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">02 · Navegação</p><h2>Rotas da plataforma</h2><p class="lead">As rotas públicas apresentam o produto e permitem acesso. As rotas <code class="inline">/app</code> dependem de uma sessão válida.</p></div>
+  <table class="table"><thead><tr><th>Rota</th><th>Área</th><th>Resumo</th></tr></thead><tbody>
+    <tr><td><code>/</code></td><td>Apresentação</td><td>Landing page e entrada para conhecer o produto.</td></tr>
+    <tr><td><code>/login</code></td><td>Acesso</td><td>Login por e-mail/senha ou Google quando configurado.</td></tr>
+    <tr><td><code>/register</code></td><td>Cadastro</td><td>Criação de conta; inclui fluxo separado com Google.</td></tr>
+    <tr><td><code>/forgot-password</code></td><td>Recuperação</td><td>Solicitar redefinição e cadastrar nova senha.</td></tr>
+    <tr><td><code>/widget</code></td><td>Widget</td><td>Interface incorporável de conversa com o parceiro.</td></tr>
+    <tr><td><code>/app</code></td><td>Visão geral</td><td>Resumo da conta; para administrador sem conta selecionada, lista clientes.</td></tr>
+    <tr><td><code>/app/integracoes</code></td><td>Integrações</td><td>Central de canais da conta.</td></tr>
+    <tr><td><code>/app/whatsapp</code></td><td>WhatsApp</td><td>Instâncias, QR Code e estado da conexão.</td></tr>
+    <tr><td><code>/app/gmail</code></td><td>Gmail</td><td>Caixas de e-mail vinculadas à conta.</td></tr>
+    <tr><td><code>/app/widget</code></td><td>Widget parceiro</td><td>Configuração e acesso ao widget da conta.</td></tr>
+    <tr><td><code>/app/equipe</code></td><td>Equipe</td><td>Gerenciar membros vinculados à conta.</td></tr>
+    <tr><td><code>/app/marca</code></td><td>Identidade</td><td>Nome, logotipo e cores da marca.</td></tr>
+    <tr><td><code>/app/assinatura</code>, <code>/app/upgrade</code></td><td>Plano</td><td>Consultar situação e iniciar ampliação/contratação.</td></tr>
+    <tr><td><code>/app/perfil</code></td><td>Perfil</td><td>Dados pessoais, foto e opções de segurança disponíveis.</td></tr>
+  </tbody></table>
+  <div class="callout"><strong>Administração de contas:</strong> o administrador pode selecionar uma conta pelo parâmetro <code class="inline">account</code>. A interface preserva esse contexto ao navegar entre telas; o servidor ainda valida a autorização.</div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>03 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">03 · Navegação</p><h2>Operação e acesso por perfil</h2><p class="lead">A área administrativa cobre o ciclo de acompanhamento de clientes contemplados; o portal oferece uma visão restrita ao beneficiário.</p></div>
+  <table class="table"><thead><tr><th>Rota</th><th>Área</th><th>Acesso indicado na interface</th></tr></thead><tbody>
+    <tr><td><code>/admin/dashboard</code></td><td>Painel operacional</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/clientes</code></td><td>Clientes da operação</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/cadastros</code></td><td>Cadastros de apoio</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/contemplados</code></td><td>Processos contemplados</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/baixas</code></td><td>Baixas e encerramentos</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/comunicacao</code></td><td>Fila, canais e histórico</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/disparo-manual</code></td><td>Envio manual/reenvio</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/auditoria</code></td><td>Eventos auditáveis</td><td>Administrador e funcionário</td></tr>
+    <tr><td><code>/admin/canais</code></td><td>Configuração operacional</td><td>Somente administrador</td></tr>
+    <tr><td><code>/admin/usuarios</code></td><td>Usuários da operação</td><td>Administrador e funcionário; ações variam por perfil</td></tr>
+    <tr><td><code>/portal</code></td><td>Processos do beneficiário</td><td>Cliente com sessão de beneficiário</td></tr>
+  </tbody></table>
+  <h3>Redirecionamento após autenticação</h3>
+  <div class="grid2">
+    <div class="card tint"><p><strong>Funcionário</strong><br><code>/admin/dashboard</code></p><p><strong>Beneficiário</strong><br><code>/portal</code></p></div>
+    <div class="card tint"><p><strong>Administrador e demais usuários da plataforma</strong><br><code>/app</code> (ou lista de contas para o administrador).</p><p><strong>Sem sessão</strong><br>As rotas privadas direcionam para <code>/login</code>.</p></div>
+  </div>
+  <p class="small" style="margin-top:3mm">Aliases legados: <code>/integracoes/whatsapp</code> e <code>/integracoes/gmail</code> redirecionam às telas do espaço; <code>/integracoes/notificacoes</code> abre comunicação; rotas desconhecidas encaminham para a página inicial da sessão.</p>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>04 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">04 · Recursos</p><h2>Fluxos principais da conta</h2><p class="lead">Cada tela combina estado de carregamento, validação, retorno de sucesso e mensagens de erro; ações críticas são confirmadas pela API.</p></div>
+  <div class="grid2">
+    <div class="card blue"><h3>Cadastro e sessão</h3><ul class="tight"><li>Cadastro e login por e-mail e senha.</li><li>Login/cadastro Google via Google Identity Services quando o Client ID está configurado.</li><li>Recuperação de senha por código enviado pelo back-end.</li><li>Token de acesso e refresh token são mantidos localmente; o refresh rotativo é tentado diante de sessão expirada.</li><li>Falha definitiva da sessão dispara retorno à tela de login.</li></ul></div>
+    <div class="card teal"><h3>WhatsApp e Gmail</h3><ul class="tight"><li>WhatsApp: solicitar QR, acompanhar estado e atualizar a conexão.</li><li>Gmail na conta: administrar caixas vinculadas conforme limites do plano.</li><li>Canal operacional Gmail: a rota administrativa solicita e-mail remetente e senha de app; apenas administrador pode salvar.</li><li>Limites e estado de conexão são exibidos a partir do contexto da conta.</li></ul></div>
+    <div class="card tint"><h3>Equipe, marca e perfil</h3><ul class="tight"><li>Gerenciar membros conforme o perfil e os limites definidos pelo servidor.</li><li>Personalizar nome, logo e cores, com prévia na interface.</li><li>Atualizar foto; a interface aceita PNG/JPG/WebP de até 5 MB e reduz a imagem antes de enviar.</li><li>Configurações indisponíveis ao titular não são mostradas como ações válidas a outros perfis.</li></ul></div>
+    <div class="card tint"><h3>Plano e cobrança</h3><ul class="tight"><li>A interface lê nível, limites, preço e configuração de pagamento do contexto fornecido pela API.</li><li>No modo de demonstração descrito pelo front, o teste inclui 1 WhatsApp e 1 Gmail por 3 dias; o plano Profissional demonstra 3 WhatsApps e 2 Gmails.</li><li>Com Stripe habilitado, a contratação redireciona para checkout hospedado e oferece cartão mensal ou Pix.</li><li>Sem Stripe, a simulação local pode demonstrar Pix/cartão fictícios sem mover dinheiro.</li><li>O estado profissional é confirmado pelo servidor; voltar do checkout não prova pagamento.</li></ul></div>
+  </div>
+  <div class="callout warn"><strong>Importante sobre pagamentos:</strong> não use a tela de retorno do navegador como confirmação. A assinatura, os limites liberados e a ativação dependem do estado validado pelo back-end e do fluxo de webhook correspondente.</div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>05 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">05 · Recursos</p><h2>Fluxo operacional de consórcios</h2><p class="lead">O front-end conduz a equipe pelo acompanhamento e pela comunicação; regras de transição, persistência e envio pertencem à API.</p></div>
+  <div class="flow" style="margin-bottom:5mm">
+    <div class="flow-card" style="border:1px solid var(--line)"><strong>1 · Cadastro</strong><span>cliente, consórcio, grupo, cota e usuário</span></div><div class="flow-arrow" style="color:var(--blue)">›</div>
+    <div class="flow-card" style="border:1px solid var(--line)"><strong>2 · Processo</strong><span>contemplação, responsável, status e documentos</span></div><div class="flow-arrow" style="color:var(--blue)">›</div>
+    <div class="flow-card" style="border:1px solid var(--line)"><strong>3 · Comunicação</strong><span>e-mail, WhatsApp, fila, tentativa e histórico</span></div><div class="flow-arrow" style="color:var(--blue)">›</div>
+    <div class="flow-card" style="border:1px solid var(--line)"><strong>4 · Encerramento</strong><span>baixa, auditoria e consulta pelo portal</span></div>
+  </div>
+  <div class="grid2">
+    <div class="card blue"><h3>Cadastros e contemplados</h3><p>Listas paginadas, busca, consulta, edição e exclusão conforme permissões. Processos exibem status e permitem ações dentro das transições aceitas pelo back-end.</p></div>
+    <div class="card teal"><h3>Comunicação e fila</h3><p>Resumo por estado, filtros, tentativas por canal, histórico e reenvio. O front inclui chave de idempotência em ações de envio para que a API possa evitar duplicidade.</p></div>
+    <div class="card tint"><h3>Disparo manual e reconciliação</h3><p>Compor mensagens por processo/canal, acompanhar o resultado e tratar tentativas incertas conforme a resposta do servidor. Diagnósticos não substituem a reconciliação da operação.</p></div>
+    <div class="card tint"><h3>Baixa, auditoria e portal</h3><p>Acompanhar processos em encerramento, registrar eventos auditáveis e permitir que o beneficiário consulte somente os próprios processos e documentos autorizados.</p></div>
+  </div>
+  <div class="callout"><strong>Nota de domínio:</strong> a rota <code class="inline">/app</code> para administrar contas da plataforma não é a mesma área que <code class="inline">/admin/clientes</code>, destinada aos cadastros da operação de consórcios.</div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>06 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">06 · Integração</p><h2>Comunicação com a API</h2><p class="lead">As telas usam serviços TypeScript compartilhados para manter autenticação, tratamento HTTP e contratos de chamadas consistentes.</p></div>
+  <table class="table"><thead><tr><th>Camada</th><th>Uso</th><th>Exemplos</th></tr></thead><tbody>
+    <tr><td><code>services/http.ts</code></td><td>Fetch comum, JSON, cabeçalhos, timeout de 30 s e conversão de erros.</td><td>401, 403, 409, 422, 429 e falhas de rede.</td></tr>
+    <tr><td><code>services/auth.ts</code></td><td>Cadastro, login, logout, recuperação, refresh e sessão.</td><td><code>/api/auth/login</code>, <code>/google</code>, <code>/refresh</code>.</td></tr>
+    <tr><td><code>services/backend.ts</code></td><td>Endpoints da operação e das integrações.</td><td><code>/api/integracoes/whatsapp/qr</code>, <code>/api/processos-contemplacao</code>.</td></tr>
+    <tr><td><code>services/platform.ts</code></td><td>Contexto multi-conta e dados da plataforma.</td><td><code>/api/platform/context</code>, clientes, canais e assinatura.</td></tr>
+  </tbody></table>
+  <h3>Comportamento de sessão e falhas</h3>
+  <ul><li>As requisições autenticadas usam <code>Authorization: Bearer</code> com o token atual.</li><li>Em 401, o cliente tenta renovar uma vez com refresh token; se a renovação falhar, limpa a sessão e avisa as rotas.</li><li>Timeout e indisponibilidade de rede recebem mensagens distintas; a interface evita afirmar sucesso quando não recebeu confirmação.</li><li>Erros de validação podem ser associados aos campos; as páginas exibem feedback próximo à ação.</li></ul>
+  <h3>Configuração do endpoint</h3>
+  <table class="table"><thead><tr><th>Variável</th><th>Finalidade</th><th>Observação</th></tr></thead><tbody>
+    <tr><td><code>VITE_API_URL</code></td><td>Prefixo opcional para chamadas HTTP.</td><td>Vazia usa a mesma origem e o proxy.</td></tr>
+    <tr><td><code>VITE_API_PROXY_TARGET</code></td><td>Destino de <code>/api</code> no Vite dev.</td><td>Padrão local: <code>http://localhost:8080</code>.</td></tr>
+    <tr><td><code>VITE_GOOGLE_CLIENT_ID</code></td><td>Client ID público do Google OAuth web.</td><td>Também deve ser configurado no servidor para validar o token.</td></tr>
+  </tbody></table>
+  <div class="callout warn"><strong>Segredos:</strong> toda variável <code class="inline">VITE_*</code> pode aparecer no bundle entregue ao navegador. Nunca coloque chaves privadas, senhas, segredo Stripe ou chave de integração nesses valores.</div>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>07 / 08</span></div>
+</section>
+
+<section class="page">
+  <div class="section-head"><p class="kicker">07 · Operação técnica</p><h2>Configurar, executar e verificar</h2><p class="lead">A execução integrada via Docker é o caminho recomendado. Para desenvolvimento de interface, o Vite inicia o front isoladamente.</p></div>
+  <div class="grid2">
+    <div class="card blue"><h3>Pilha completa com Docker</h3><pre>cd Back-end
+if (!(Test-Path .env)) { Copy-Item .env.example .env }
+# Preencha os valores locais no .env
+docker compose --profile full up --build -d --wait --wait-timeout 600</pre><p>O perfil completo compila e inicia front, API, MySQL e serviços de integração. Padrões do projeto: front <code>5173</code>, API/Swagger <code>8080</code>, MySQL <code>3307</code>, Evolution <code>8081</code>. Portas podem ser alteradas no `.env` se já estiverem ocupadas.</p></div>
+    <div class="card teal"><h3>Vite local</h3><pre>cd Front-End
+npm ci
+npm run dev</pre><p>Abra a origem mostrada pelo Vite, normalmente <code>http://localhost:5173</code>. Para outra API local, defina <code>VITE_API_PROXY_TARGET</code>. O repositório também fornece scripts de início com Docker.</p></div>
+  </div>
+  <h3 style="margin-top:4mm">Comandos de qualidade</h3>
+  <pre>npm run build       # TypeScript + pacote de produção
+npm run lint        # análise estática com Oxlint
+npm run test:ui     # Playwright com Vite isolado em 5174</pre>
+  <p>Os testes reais contra API/banco usam configuração separada, schema descartável, conta fictícia e portas próprias; não devem receber credenciais nem dados de produção. A suíte Stripe exige ambiente isolado e cartão oficial de teste.</p>
+  <div class="callout"><strong>Atalhos de rota:</strong> o Nginx do Docker mantém fallback para rotas da SPA. Após mudança de código, reconstrua a imagem do front; reiniciar apenas o navegador não atualiza o bundle.</div>
+  <h3>Referências do código</h3>
+  <p class="small">Esta documentação descreve o repositório <a href="https://github.com/SystemX-PI/Front-End">SystemX-PI/Front-End</a> no estado de <code>main</code> em <code>6537348</code>. Arquivos-base: <code>src/routes/index.tsx</code>, <code>src/pages/PlatformApp.tsx</code>, <code>src/services/auth.ts</code>, <code>src/services/http.ts</code>, <code>src/services/backend.ts</code>, <code>src/services/platform.ts</code>, <code>README.md</code> e <code>package.json</code>.</p>
+  <p class="small">Os contratos e as regras finais são mantidos pelo back-end. Quando interface e API divergirem, prevalece o comportamento validado pelo servidor; atualize este guia após mudanças relevantes de rota, perfil ou contrato.</p>
+  <div class="footer"><span>SystemX · Guia do front-end</span><span>08 / 08</span></div>
+</section>
+</body>
+</html>
