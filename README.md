@@ -12,6 +12,7 @@ O objetivo é desenvolver uma aplicação web capaz de tornar mais eficiente o p
 - [Execução local e testes do Front-End](https://github.com/SystemX-PI/Front-End#executar-localmente)
 - [Contratos HTTP do frontend e backend](CONTRATOS_HTTP.md)
 - [Validação e preparação da entrega](VALIDACAO_ENTREGA.md)
+- [Painéis e matriz de permissões](PAINEIS_E_PERMISSOES.md)
 
 ## Objetivo do Projeto
 
