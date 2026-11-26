@@ -13,6 +13,7 @@ O objetivo é desenvolver uma aplicação web capaz de tornar mais eficiente o p
 - [Contratos HTTP do frontend e backend](CONTRATOS_HTTP.md)
 - [Validação e preparação da entrega](VALIDACAO_ENTREGA.md)
 - [Painéis e matriz de permissões](PAINEIS_E_PERMISSOES.md)
+- [Apresentação geral do projeto (PowerPoint)](docs/apresentacao/Apresentacao_Geral_SystemX_v3.pptx)
 
 ## Objetivo do Projeto
 
