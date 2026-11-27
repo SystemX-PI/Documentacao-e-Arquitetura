@@ -69,7 +69,7 @@ a { color:#155fcb; text-decoration:none; }
   <p class="kicker">Documentação técnica · produto web</p>
   <h1>Front-end<br>SystemX</h1>
   <p class="lead">Guia funcional e técnico da interface web: estrutura, navegação, perfis, integrações, comunicação com a API e execução local.</p>
-  <div class="meta"><strong>ConsorTech · SystemX-PI/Front-End</strong><br>Referência do código: branch <code>main</code>, commit <code>6537348</code><br>Revisão: 26 de novembro de 2026</div>
+  <div class="meta"><strong>ConsorTech · SystemX-PI/Front-End</strong><br>Referência consultada: branch <code>main</code>, commit <code>99313c7</code><br>Revisão: 26 de novembro de 2026</div>
   <div class="cover-art">
     <p class="kicker">Visão da arquitetura</p>
     <div class="flow">
@@ -86,7 +86,7 @@ a { color:#155fcb; text-decoration:none; }
 <section class="page">
   <div class="section-head"><p class="kicker">01 · Fundamentos</p><h2>Como o front está organizado</h2><p class="lead">Uma aplicação de página única que atende o espaço da conta e a operação de consórcios pela mesma base de interface.</p></div>
   <div class="grid2">
-    <div class="card blue"><h3>Stack principal</h3><p><span class="pill">React 19</span><span class="pill">TypeScript 6</span><span class="pill">Vite 8</span><span class="pill">React Router 7</span><span class="pill">CSS</span></p><p>Lucide fornece ícones; <code>qrcode.react</code> desenha QR Codes de demonstração. O estilo combina folhas CSS próprias e o plugin Tailwind do Vite.</p></div>
+    <div class="card blue"><h3>Stack principal</h3><p><span class="pill">React 19</span><span class="pill">TypeScript 6</span><span class="pill">Vite 8</span><span class="pill">React Router 7</span><span class="pill">CSS</span></p><p>Lucide fornece ícones; <code>qrcode.react</code> renderiza o QR Code Pix recebido do Stripe no checkout. O estilo combina folhas CSS próprias e o plugin Tailwind do Vite.</p></div>
     <div class="card teal"><h3>Responsabilidades</h3><ul class="tight"><li>Renderizar as telas e guiar a navegação.</li><li>Validar dados de entrada e apresentar erros, carregamentos e confirmações.</li><li>Enviar e receber dados por endpoints REST.</li><li>Exibir o estado informado pela API, sem substituir regras do servidor.</li></ul></div>
   </div>
   <h3 style="margin-top:5mm">Mapa do código</h3>
@@ -111,7 +111,7 @@ a { color:#155fcb; text-decoration:none; }
     <tr><td><code>/register</code></td><td>Cadastro</td><td>Criação de conta; inclui fluxo separado com Google.</td></tr>
     <tr><td><code>/forgot-password</code></td><td>Recuperação</td><td>Solicitar redefinição e cadastrar nova senha.</td></tr>
     <tr><td><code>/widget</code></td><td>Widget</td><td>Interface incorporável de conversa com o parceiro.</td></tr>
-    <tr><td><code>/app</code></td><td>Visão geral</td><td>Resumo da conta; para administrador sem conta selecionada, lista clientes.</td></tr>
+    <tr><td><code>/app</code></td><td>Espaço da empresa</td><td>Visão geral da conta; administradores e funcionários seguem para a área operacional/global.</td></tr>
     <tr><td><code>/app/integracoes</code></td><td>Integrações</td><td>Central de canais da conta.</td></tr>
     <tr><td><code>/app/whatsapp</code></td><td>WhatsApp</td><td>Instâncias, QR Code e estado da conexão.</td></tr>
     <tr><td><code>/app/gmail</code></td><td>Gmail</td><td>Caixas de e-mail vinculadas à conta.</td></tr>
@@ -137,13 +137,13 @@ a { color:#155fcb; text-decoration:none; }
     <tr><td><code>/admin/disparo-manual</code></td><td>Envio manual/reenvio</td><td>Administrador e funcionário</td></tr>
     <tr><td><code>/admin/auditoria</code></td><td>Eventos auditáveis</td><td>Administrador e funcionário</td></tr>
     <tr><td><code>/admin/canais</code></td><td>Configuração operacional</td><td>Somente administrador</td></tr>
-    <tr><td><code>/admin/usuarios</code></td><td>Usuários da operação</td><td>Administrador e funcionário; ações variam por perfil</td></tr>
+    <tr><td><code>/admin/usuarios</code></td><td>Usuários da operação</td><td>Somente administrador</td></tr>
     <tr><td><code>/portal</code></td><td>Processos do beneficiário</td><td>Cliente com sessão de beneficiário</td></tr>
   </tbody></table>
   <h3>Redirecionamento após autenticação</h3>
   <div class="grid2">
-    <div class="card tint"><p><strong>Funcionário</strong><br><code>/admin/dashboard</code></p><p><strong>Beneficiário</strong><br><code>/portal</code></p></div>
-    <div class="card tint"><p><strong>Administrador e demais usuários da plataforma</strong><br><code>/app</code> (ou lista de contas para o administrador).</p><p><strong>Sem sessão</strong><br>As rotas privadas direcionam para <code>/login</code>.</p></div>
+    <div class="card tint"><p><strong>Administrador e funcionário</strong><br><code>/admin/dashboard</code></p><p><strong>Beneficiário</strong><br><code>/portal</code></p></div>
+    <div class="card tint"><p><strong>Titular e usuário de conta</strong><br><code>/app</code>. Administradores podem abrir o contexto de uma empresa por <code>?account=ID</code>.</p><p><strong>Sem sessão</strong><br>As rotas privadas direcionam para <code>/login</code>.</p></div>
   </div>
   <p class="small" style="margin-top:3mm">Aliases legados: <code>/integracoes/whatsapp</code> e <code>/integracoes/gmail</code> redirecionam às telas do espaço; <code>/integracoes/notificacoes</code> abre comunicação; rotas desconhecidas encaminham para a página inicial da sessão.</p>
   <div class="footer"><span>SystemX · Guia do front-end</span><span>04 / 08</span></div>
@@ -217,7 +217,8 @@ npm run test:ui     # Playwright com Vite isolado em 5174</pre>
   <p>Os testes reais contra API/banco usam configuração separada, schema descartável, conta fictícia e portas próprias; não devem receber credenciais nem dados de produção. A suíte Stripe exige ambiente isolado e cartão oficial de teste.</p>
   <div class="callout"><strong>Atalhos de rota:</strong> o Nginx do Docker mantém fallback para rotas da SPA. Após mudança de código, reconstrua a imagem do front; reiniciar apenas o navegador não atualiza o bundle.</div>
   <h3>Referências do código</h3>
-  <p class="small">Esta documentação descreve o repositório <a href="https://github.com/SystemX-PI/Front-End">SystemX-PI/Front-End</a> no estado de <code>main</code> em <code>6537348</code>. Arquivos-base: <code>src/routes/index.tsx</code>, <code>src/pages/PlatformApp.tsx</code>, <code>src/services/auth.ts</code>, <code>src/services/http.ts</code>, <code>src/services/backend.ts</code>, <code>src/services/platform.ts</code>, <code>README.md</code> e <code>package.json</code>.</p>
+  <p class="small">Esta revisão foi conferida com <a href="https://github.com/SystemX-PI/Front-End">Front-End</a> (<code>main</code>, <code>99313c7</code>), <a href="https://github.com/SystemX-PI/Back-end">Back-end</a> (<code>main</code>, <code>67dcfc1</code>) e <a href="https://github.com/SystemX-PI/Documentacao-e-Arquitetura">documentação</a> (<code>main</code>, <code>2041509</code>). Arquivos-base do front: <code>src/routes/index.tsx</code>, <code>src/pages/PlatformApp.tsx</code>, <code>src/services/auth.ts</code>, <code>src/services/http.ts</code>, <code>src/services/backend.ts</code>, <code>src/services/platform.ts</code>, <code>README.md</code> e <code>package.json</code>.</p>
+  <p class="small">A validação da candidata documenta migrações até V21; o código atual do back-end inclui V22. Reexecute e registre os ensaios sobre a revisão final antes de apresentar o resultado como validado.</p>
   <p class="small">Os contratos e as regras finais são mantidos pelo back-end. Quando interface e API divergirem, prevalece o comportamento validado pelo servidor; atualize este guia após mudanças relevantes de rota, perfil ou contrato.</p>
   <div class="footer"><span>SystemX · Guia do front-end</span><span>08 / 08</span></div>
 </section>
